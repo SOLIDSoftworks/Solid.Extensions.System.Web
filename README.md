@@ -1,5 +1,7 @@
 # Solid.Extensions.System.Web [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://en.wikipedia.org/wiki/MIT_License) [![solidsoftworks MyGet Build Status](https://www.myget.org/BuildSource/Badge/solidsoftworks?identifier=39fc5c41-0af2-4d99-af28-48a6a67b55d7)](https://www.myget.org/)
 
+Solid.Extensions.System.Web is a library for patching HttpContext.Current to be more async friendly. This library is built for .Net Framework 4.6.1 and above.
+
 ## Disclaimer
 We do not recommended using this library in any new applications. You should always try to have your stack be fully async instead of using Task.Run or any other variation of that within sync methods.
 
