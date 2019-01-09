@@ -18,11 +18,12 @@ Just reference the library. When the ASP.Net application starts, it will patch H
 ```csharp
 public string GetString()
 {
+    HttpContext.Items["Hello"] = "World";
     return HttpContext.Current.Run(() => GetStringAsync());
 }
 
 private async Task<string> GetStringAsync()
 {
-    return "Hello world";
+    return $"Hello {HttpContext.Current.Items["Hello"]}";
 }
 ```
