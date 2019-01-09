@@ -74,7 +74,7 @@ namespace System.Web
 
             try
             {
-                callContext.Add("HttpContext", context);
+                //callContext.Add("HttpContext", context);
                 if (preparing != null)
                     preparing(callContext);
             }
@@ -84,8 +84,9 @@ namespace System.Web
                 throw;
             }
 
-            var task = Task.Run<T>(async () =>
+            var task = Task.Factory.StartNew<Task<T>>(async state =>
             {
+                callContext.Add("HttpContext", state);
                 try
                 {
                     if (running != null)
@@ -98,7 +99,7 @@ namespace System.Web
                 {
                     callContext.Clear();
                 }
-            });
+            }, context, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default).Unwrap();
 
             task.Wait();
             return task.Result;
